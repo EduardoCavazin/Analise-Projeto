@@ -1,0 +1,40 @@
+@startuml
+    left to right direction
+    skinparam{
+        actorStyle hollow
+        ActorBackgroundColor #LightBlue
+        ActivityBorderColor #Red
+    }
+    
+    :Cliente: as Cliente
+
+package "Funcionarios"{
+    :Farmaceutico: as F1 
+    :Caixa: as C1
+}
+
+package "Farmacia"{
+    usecase "Pesquisa \nLaboratorio" as CU001
+    usecase "Consulta de \nCadastro de Remedio" as CU002
+    usecase "Verificar Histórico\nde Vendas " as CU003
+    usecase "Gerenciar \nLaboratório"  as CU004
+    usecase "Finalizar \nVenda" as CU005
+    usecase "Atualizar \nEstoque" as CU006
+    usecase "Comprar Remedios" as CU007
+}
+
+    Cliente -- CU007
+    F1 -- CU001
+    F1 -- CU002
+    C1 -- CU003
+    C1 -- CU005
+    F1 -- CU004
+    
+
+
+    CU001 <.. CU004 : <<extends>>
+    CU005 ..> CU006 : <<include>>
+
+    
+
+@enduml
